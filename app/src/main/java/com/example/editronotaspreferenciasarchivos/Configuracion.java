@@ -78,20 +78,23 @@ public class Configuracion extends AppCompatActivity {
         EstiloConfiguracion intEstiConf=extras.getParcelable("intentoEstiloConfiguracion");
         spinnerTamLetra.setSelection(arrAdapTamLetra.getPosition(intEstiConf.getTamLetra()));
 
-/*
 
-        String colorInte=intEstiConf.getColorLetra();
-        String a="";
-        for(int i=0;i<arrColor.size();i++){
-            a= arrColor.get(i).getHex();
-            if(colorInte.equals(a)){
-                spinnerColorLetra.setSelection(arrAdapColorLetra.getPosition(i));
+        String colorInteLetra=" "+intEstiConf.getColorLetra();
+        for(Color c:arrColor){
+            if(colorInteLetra.equals(" "+c.getHex())){
+                spinnerColorLetra.setSelection(arrColor.indexOf(c));
+              //  Toast.makeText(Configuracion.this,"seleccion>>>>>>"+arrColor.indexOf(c),Toast.LENGTH_SHORT).show();
             }
-
         }
 
+        String colorInteFondo=" "+intEstiConf.getColorFondo();
+        for(Color c:arrColor){
+            if(colorInteFondo.equals(" "+c.getHex())){
+                spinnerColorFondo.setSelection(arrColor.indexOf(c));
+               // Toast.makeText(Configuracion.this,"seleccion>>>>>>"+arrColor.indexOf(c),Toast.LENGTH_SHORT).show();
+            }
+        }
 
-        */
         //Toast.makeText(Configuracion.this,"seleccion"+a,Toast.LENGTH_SHORT).show();
 
         spinnerTamLetra.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -127,16 +130,11 @@ public class Configuracion extends AppCompatActivity {
                 estiloConfiguracion.setColorFondo(e);
                 //   Toast.makeText(Configuracion.this,"seleccion"+arrColor.get(i).getHex(),Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
-
-
-
-
 
         aceptar=(Button) findViewById(R.id.button_editar_id);
         aceptar.setOnClickListener(new View.OnClickListener() {
@@ -154,7 +152,6 @@ public class Configuracion extends AppCompatActivity {
         editor.putString("tamanioLetra", ""+estiloConfi.getTamLetra());
         editor.putString("colorLetra", ""+estiloConfi.getColorLetra());
         editor.putString("colorFondo", ""+estiloConfi.getColorFondo());
-
         editor.commit();
         finish();
     }
